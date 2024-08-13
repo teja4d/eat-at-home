@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import InputField from '../elements/InputField';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 //import './PaymentPage.css';
 
 const PaymentPage = () => {
@@ -7,7 +9,9 @@ const PaymentPage = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
   const [cardName, setCardName] = useState('');
-  const handlePayment = () => {
+  const navigate = useNavigate();
+  const userId = sessionStorage.getItem('userId');
+  const handlePayment = async () => {
     //all fields are required
     if (
       cardNumber === '' ||
@@ -19,7 +23,12 @@ const PaymentPage = () => {
       return;
     }
 
-    alert('Payment successful');
+    try {
+      await axios.post('http://localhost:5500/order', { userId });
+      navigate('/my-order');
+    } catch (error) {
+      console.error('Error confirming order:', error);
+    }
   };
 
   return (

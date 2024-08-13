@@ -19,6 +19,7 @@ const ChangePassword = () => {
   });
   const { login } = useAuth();
   const navigate = useNavigate();
+  const userId = sessionStorage.getItem('userId');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,12 +48,19 @@ const ChangePassword = () => {
     }
 
     try {
-      const response = await axios.post(
-        'http://localhost:5500/chnage-password',
-        credentials
+      const response = await axios.put(
+        'http://localhost:5500/change-password',
+        {
+          userId,
+          oldPassword: credentials.oldPassword,
+          newPassword: credentials.newPassword,
+        }
       );
-      if (response.data.userId) {
-        login(response.data.userId);
+      
+      if (response.status === 200) {
+        console.log('Password changed successfully');
+        alert('Password changed successfully');
+        login(userId);
         navigate('/');
       }
     } catch (error) {
@@ -64,22 +72,21 @@ const ChangePassword = () => {
     <div className="container">
       <div className="row justify-content-center">
         <div className="bg-light  shadow-md col-md-4 p-4 rounded-2 mt-5">
-          <div>
-            {showError.show ? (
-              <AlertBanner message={showError.message} />
-            ) : null}
-          </div>
           <form
             onSubmit={handleSubmit}
             className=""
           >
             <InputField
+              placeholder={'Old Password'}
               label="Old Password"
               type="password"
               name="oldPassword"
               value={credentials.oldPassword}
               handleChange={handleChange}
               required
+              isValid={credentials.oldPassword.length > 5}
+              feedback="Password should be atleast 6 characters"
+              showValid={false}
             />
 
             <InputField
@@ -90,6 +97,8 @@ const ChangePassword = () => {
               handleChange={handleChange}
               placeholder="Password"
               required
+              isValid={!showError.show}
+              feedback={showError.message}
             />
 
             <InputField
@@ -99,6 +108,8 @@ const ChangePassword = () => {
               value={credentials.confirmPassword}
               handleChange={handleChange}
               placeholder="Password"
+              isValid={!showError.show}
+              feedback={showError.message}
               required
             />
             <button

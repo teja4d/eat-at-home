@@ -11,7 +11,8 @@ const InputField = ({
   isValid,
   feedback,
   prependText,
-  placeholder
+  placeholder,
+  showValid = true,
 }) => {
   const [touched, setTouched] = useState(false);
 
@@ -31,11 +32,11 @@ const InputField = ({
           value={value}
           onChange={handleChange}
           className={`form-control ${small ? 'form-control-sm' : ''} ${
-            touched && !isValid
+            isValid !== undefined && (touched && !isValid
               ? 'is-invalid'
-              : touched && isValid
+              : touched && isValid && !showValid
               ? 'is-valid'
-              : ''
+              : '')
           }`}
           required={required}
           aria-describedby={`${name}Feedback`}

@@ -64,7 +64,7 @@ const Home = () => {
                 className="card-img-top"
                 alt={item.name}
                 height={200}
-                width={180}
+                width={160}
               />
               <div className="card-body">
                 <h5 className="card-title">{item.name}</h5>

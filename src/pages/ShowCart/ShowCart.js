@@ -86,13 +86,7 @@ const ShowCart = () => {
       navigate('/login');
       return;
     }
-
-    try {
-      await axios.post('http://localhost:5500/order', { userId });
-      navigate('/my-order');
-    } catch (error) {
-      console.error('Error confirming order:', error);
-    }
+    navigate('/payment');
   };
 
   return (
