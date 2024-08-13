@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 function OrderHistory() {
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState();
   const userId = sessionStorage.getItem('userId');
 
   useEffect(() => {
@@ -19,7 +19,19 @@ function OrderHistory() {
     };
     fetchOrders();
   }, [userId]);
-  console.log(orders);
+
+  if (!orders) {
+    return (
+      <div className="d-flex justify-content-center mt-5 align-items-center">
+        <div
+          className="spinner-border text-primary"
+          role="status"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container m-5 mx-auto">

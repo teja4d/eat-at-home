@@ -12,7 +12,7 @@ const InputField = ({
   feedback,
   prependText,
   placeholder,
-  showValid = true,
+  showValid = false,
 }) => {
   const [touched, setTouched] = useState(false);
 

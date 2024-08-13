@@ -51,6 +51,7 @@ const PaymentPage = () => {
                 handleChange={(e) => setCardName(e.target.value)}
                 placeholder="Enter cardholder name"
                 required
+                showValid
                 isValid={cardName !== ''}
                 feedback={cardName !== '' ? 'Please enter cardholder name' : ''}
               />
@@ -65,6 +66,7 @@ const PaymentPage = () => {
                 handleChange={(e) => setCardNumber(e.target.value)}
                 placeholder="Enter card number"
                 required
+                showValid
                 isValid={cardNumber !== '' && cardNumber.length === 16}
                 feedback="Please valid 16 digit enter card number"
               />
@@ -80,6 +82,7 @@ const PaymentPage = () => {
                   handleChange={(e) => setExpiryDate(e.target.value)}
                   placeholder="MM/YY"
                   required
+                  showValid
                   isValid={
                     expiryDate !== '' &&
                     expiryDate.length === 5 &&
@@ -98,6 +101,7 @@ const PaymentPage = () => {
                   handleChange={(e) => setCvv(e.target.value)}
                   placeholder="Enter CVV"
                   required
+                  showValid
                   isValid={cvv !== '' && cvv.length === 3}
                   feedback="Please enter valid 3 digit CVV"
                 />

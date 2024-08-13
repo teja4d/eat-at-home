@@ -34,6 +34,13 @@ const App = () => {
           </Link>
           <div>
             <Link
+              to="/"
+              style={{ textDecoration: 'none' }}
+              className="px-2"
+            >
+              Home
+            </Link>
+            <Link
               to="/contact-us"
               style={{ textDecoration: 'none' }}
               className="px-2"

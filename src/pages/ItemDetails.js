@@ -65,13 +65,12 @@ const ItemDetails = () => {
       </div>
     );
   }
-console.log(item);
   return (
     <div className="container text-center">
       <div className="row mt-4">
         <div className="col-md-6 col-sm-12 mb-4">
           <img
-            src={"/"+item.photo}
+            src={item.photo.includes("https") ? item.photo : "/"+item.photo}
             alt={item.name}
             className='rounded-2 img-fluid'
             width={400}
